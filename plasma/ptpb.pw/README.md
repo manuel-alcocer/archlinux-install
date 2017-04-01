@@ -20,10 +20,10 @@ $ curl https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master
 
 - Reiniciar dolphin (basta con cerrarlo y volverlo a abrir)
 
-- Pulsar con el botón derecho sobre el fichero y elegir: Acciones > Send file to ptpb.pw
+- Pulsar con el botón derecho sobre el fichero y elegir: ```Acciones > Send file to ptpb.pw```
 
-- Una vez terminada la transferencia la URL del fichero estará en el portapapeles
+- Una vez terminada la transferencia, la URL del fichero estará en el portapapeles
 
-## TODO:
+## TODO
 
 - Arreglar URL para el coloreado de sintaxis
