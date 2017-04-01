@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+Actions=sendFile;
+MimeType=all/allfiles;
+
+[Desktop Action sendFile]
+Name=Send file to ptpb.io
+Name[en_GB]=Send file to ptpb.pw
+Name[es]=Enviar archivo a ptpb.pw
+
+Icon=telepathy-kde
+Exec=/home/manuel/.local/bin/ptpb.pw.sh %U 
