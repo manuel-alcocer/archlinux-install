@@ -20,18 +20,20 @@ function crearRutas(){
 }
 
 function descargarFicheros(){
-    curl -o "${serviceMenusPath}/sendtoptpb.desktop" 'https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/ServiceMenus/sendptpb.desktop'
-    curl -o "${scriptPath}/ptpb.pw.sh" 'https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/bin/ptpb.pw.sh'
+    serviceFile='sendtoptpb.desktop'
+    curl -o "${serviceMenusPath}/${serviceFile}" 'https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/ServiceMenus/sendtoptpb.desktop'
+    scriptFile='ptpb.pw.sh'
+    curl -o "${scriptPath}/${scriptFile}" 'https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/bin/ptpb.pw.sh'
 }
 
 
 function configurarFicheros(){
-    chmod u+x "${scriptPath}/ptpb.pw.sh"
+    chmod u+x "${scriptPath}/${scriptFile}"
     [[ $? != 0 ]] && {
         printf 'Hubieron errores dando permisos de ejeción al ejecutable...\n';
         printf 'La instalación no está completa\n';
     }
-    sed -i "s/usuario/$USER/" "${serviceMenusPath}/sendptpb.desktop"
+    sed -i "s/usuario/$USER/" "${serviceMenusPath}/${serviceFile}"
     [[ $? != 0 ]] && {
         printf 'Hubieron errores cambiando la ruta del ejecutable...\n';
         printf 'La instalación no está completa\n';
