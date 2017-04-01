@@ -5,9 +5,9 @@ Actions=sendFile;
 MimeType=all/allfiles;
 
 [Desktop Action sendFile]
-Name=Send file to ptpb.io
+Name=Send file to ptpb.pw
 Name[en_GB]=Send file to ptpb.pw
 Name[es]=Enviar archivo a ptpb.pw
 
 Icon=telepathy-kde
-Exec=/home/manuel/.local/bin/ptpb.pw.sh %U 
+Exec=/home/usuario/.local/bin/ptpb.pw.sh %U 
