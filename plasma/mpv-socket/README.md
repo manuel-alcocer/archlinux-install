@@ -13,7 +13,7 @@ Este plugin para Dolphin abre un fichero multimedia con __mpv__ escuchando en el
 ## Instalación
 
 ```
-$ curl https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/install.sh | bash -
+$ curl https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/mpv-socket/install.sh | bash -
 ```
 
 ## Uso
