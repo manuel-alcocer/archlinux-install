@@ -13,7 +13,8 @@ function crearRutas(){
 
 function descargarFicheros(){
     applicationFile='mpv-socket.desktop'
-    curl -o "${applicationPath}/${applicationFile}" 'https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/ptpb.pw/ServiceMenus/sendtoptpb.desktop'
+    URL='https://raw.githubusercontent.com/manuel-alcocer/archlinux-install/master/plasma/mpv-socket/mpv-socket.desktop'
+    curl -o "${applicationPath}/${applicationFile}" "${URL}" 
 }
 
 crearRutas
