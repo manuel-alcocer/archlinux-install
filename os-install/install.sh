@@ -76,7 +76,8 @@ function elegirDisco(){
     discoNum=''
     while [[ -z ${lista[discoNum]} ]]; do
         imprimirListaDiscos
-        read -p 'Introduce el numero de disco para instalar Grub: ' discoNum
+        printf 'Introduce el numero de disco para instalar Grub: '
+        read discoNum
     done
 }
 
@@ -86,7 +87,8 @@ function configurarGrub(){
     while [[ ${confirm,,} != 's' ]]; do
         elegirDisco
         printf 'Ha elegido el disco %s' "${lista[discoNum]}"
-        read '¿Instalar Grub en ese disco (s/n)?: ' confirm
+        printf '¿Instalar Grub en ese disco (s/n)?: '
+        read confirm
     done
     $ARCHROOT /usr/bin/grub-install /dev/${lista[discoNum]}
     $ARCHROOT /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg
