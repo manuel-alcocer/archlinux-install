@@ -7,9 +7,7 @@ function ajustarReloj(){
 }
 
 function instalarPaquetes(){
-    pacstrap -i /mnt base base-devel \
-        vim nvim curl yajl os-prober grub \
-        git tmux networkmanager
+    pacstrap -i /mnt base base-devel
 }
 
 function generarFstab(){
