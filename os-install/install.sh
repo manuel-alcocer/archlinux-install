@@ -3,7 +3,7 @@
 ARCH='arch-chroot /mnt /bin/bash'
 
 function ajustarReloj(){
-	timedatectl set-ntp true
+    timedatectl set-ntp true
 }
 
 function instalarPaquetes(){
@@ -49,17 +49,48 @@ function darNombre(){
 }
 
 function configurarRed(){
-    $ARCHROOT /usr/bin/systemctl enable NetworkManager.service
+    $ARCHROOT /usr/bin/systemctl enable /usr/lib/systemd/system/NetworkManager.service
 }
 
 function asignarPassword(){
     $ARCHROOT printf 'root\nroot\n' | passwd
 }
 
-function opcionesGrub(){
+function comprobacionLvm(){
+    read -p '¿Añadir LVM a mkinitcpio.conf (s/n)? ' addLvm
+    if [[ ${addLvm,,} == 's' ]]; then
+        sed -r 's/(HOOKS="base udev autodetect modconf block) (filesystems keyboard fsck")/\1 lvm2 \2/' \
+            /mnt/etc/mkinitcpio.conf
+        $ARCHROOT /usr/bin/mkinitcpio -p linux
+    fi
+}
+
+function imprimirListaDiscos(){
+    lista+=($(lsblk | grep -Ei '^.d[a-z][^0-9]' | awk '{ print $1 }'))
+    for indice in ${!lista[@]}; do
+        printf '%s ... %s' "$indice" "${lista[indice]}"
+    done
+
+}
+
+function elegirDisco(){
+    discoNum=''
+    while [[ -z ${lista[discoNum]} ]]; do
+        imprimirListaDiscos
+        read -p 'Introduce el numero de disco para instalar Grub: ' discoNum
+    done
+}
+
+function configurarGrub(){
     sed -r 's/(GRUB_CMDLINE_LINUX_DEFAULT="quiet.*)"/\1 net.ifnames=0"/' /mnt/etc/default/grub
-    read -p 'Introduce el disco'
-    $ARCHROOT /usr/bin/grub-install
+    confirm=''
+    while [[ ${confirm,,} != 's' ]]; do
+        elegirDisco
+        printf 'Ha elegido el disco %s' "${lista[discoNum]}"
+        read '¿Instalar Grub en ese disco (s/n)?: ' confirm
+    done
+    $ARCHROOT /usr/bin/grub-install /dev/${lista[discoNum]}
+    $ARCHROOT /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 ajustarReloj
@@ -71,3 +102,5 @@ configurarTeclado
 darNombre
 configurarRed
 asignarPassword
+comprobacionLvm
+configurarGrub
