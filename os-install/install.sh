@@ -7,7 +7,7 @@ function ajustarReloj(){
 }
 
 function instalarPaquetes(){
-    pacstrap -i /mnt base base-devel
+    yes | pacstrap /mnt base base-devel
 }
 
 function generarFstab(){
