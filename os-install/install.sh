@@ -48,8 +48,18 @@ function darNombre(){
     cat /mnt/etc/hosts
 }
 
-function red(){
+function configurarRed(){
     $ARCHROOT /usr/bin/systemctl enable NetworkManager.service
+}
+
+function asignarPassword(){
+    $ARCHROOT printf 'root\nroot\n' | passwd
+}
+
+function opcionesGrub(){
+    sed -r 's/(GRUB_CMDLINE_LINUX_DEFAULT="quiet.*)"/\1 net.ifnames=0"/' /mnt/etc/default/grub
+    read -p 'Introduce el disco'
+    $ARCHROOT /usr/bin/grub-install
 }
 
 ajustarReloj
@@ -58,4 +68,6 @@ generarFstab
 ajustarZoneTime
 generarLocale
 configurarTeclado
-red
+darNombre
+configurarRed
+asignarPassword
