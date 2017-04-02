@@ -70,7 +70,6 @@ function imprimirListaDiscos(){
     for indice in ${!lista[@]}; do
         printf '%s ... %s' "$indice" "${lista[indice]}"
     done
-
 }
 
 function elegirDisco(){
@@ -100,7 +99,7 @@ ajustarZoneTime
 generarLocale
 configurarTeclado
 darNombre
-configurarRed
-asignarPassword
+#configurarRed
 comprobacionLvm
 configurarGrub
+asignarPassword
