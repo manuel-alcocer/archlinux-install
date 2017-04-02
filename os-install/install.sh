@@ -57,7 +57,8 @@ function asignarPassword(){
 }
 
 function comprobacionLvm(){
-    read -p '¿Añadir LVM a mkinitcpio.conf (s/n)? ' addLvm
+    printf '¿Añadir LVM a mkinitcpio.conf (s/n)? '
+    read addLvm
     if [[ ${addLvm,,} == 's' ]]; then
         sed -r 's/(HOOKS="base udev autodetect modconf block) (filesystems keyboard fsck")/\1 lvm2 \2/' \
             /mnt/etc/mkinitcpio.conf
