@@ -11,6 +11,7 @@ function instalarPaquetes(){
         neovim python-neovim python2-neovim \
         tmux networkmanager grub os-prober git \
         curl yajl openssl openssh
+    pkill yes
 }
 
 function generarFstab(){
